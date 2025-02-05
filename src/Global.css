@@ -1,0 +1,174 @@
+@import url("https://unpkg.com/98.css");
+
+@font-face {
+  font-family: 'Levi Windows';
+  src: url('./fonts/LeviWindows.ttf') format('truetype');
+}
+
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Levi Windows', sans-serif !important;
+}
+
+/* Estilo global */
+body {
+  background-color: #008080 !important;
+  margin: 0;
+  overflow: hidden;
+  user-select: none; /* Impede a seleção de texto */
+  -webkit-user-select: none; /* Compatibilidade com navegadores baseados em WebKit */
+  -moz-user-select: none; /* Compatibilidade com Firefox */
+  -ms-user-select: none; /* Compatibilidade com IE/Edge */
+}
+
+.icones-container {
+  display: flex;
+  flex-direction: column; /* Empilha os ícones na vertical */
+  align-items: flex-start; /* Alinha todos à esquerda */
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  gap: 10px;
+  z-index: 1;
+}
+
+.icone {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Garante que tudo fique centralizado */
+  text-align: center;
+  cursor: pointer;
+  width: 64px; /* Define um tamanho fixo para manter alinhado */
+}
+
+.icone img {
+  width: 55px;
+  height: 55px;
+}
+
+.icone span {
+  display: block;
+  margin-top: 1px; /* Espaço entre a imagem e o texto */
+  margin-bottom: 20px;
+  color: white;
+  font-size: 17px;
+  font-weight: bold;
+  width: 100%;
+  text-align: center; /* Garante que o texto fique centralizado abaixo */
+}
+
+/* Estilização das janelas */
+.janela {
+  width: 300px;
+  height: 200px;
+  background-color: #c0c0c0;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+  position: absolute;
+  user-select: none;
+  border: 2px solid #000;
+}
+
+/* Barra de título */
+.title-bar {
+  background-color: #005f87;
+  color: white;
+  padding: 5px;
+  font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title-bar-text {
+  font-size: 14px;
+}
+
+.title-bar-controls {
+  display: flex;
+  gap: 2px;
+}
+
+.title-bar-controls button {
+  background: silver;
+  border: none;
+  color: #000;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.title-bar-controls button:hover {
+  color: red;
+}
+
+/* Conteúdo da janela */
+.window-body {
+  padding: 100px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* Ajustando os estilos dos botões e elementos dentro da janela */
+.janela .botoes button {
+  background: none;
+  border: none;
+  color: #000;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.janela .botoes button:hover {
+  color: red;
+}
+
+/* Estilo de conteúdo específico das janelas */
+.janela .conteudo {
+  padding: 10px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.janela .conteudo p {
+  font-size: 14px;
+  padding: 10px;
+  line-height: 1.5;
+}
+
+.taskbar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 40px;
+  background-color: #c0c0c0;
+  border-top: 2px solid #ffffff;
+  border-bottom: 2px solid #808080;
+  display: flex;
+  align-items: center;
+  padding: 2px;
+}
+
+.start {
+  background-image: url(assets/start.png);
+  background-size:70%;
+  background-position: center;
+  background-repeat: no-repeat;
+  margin: 2px;
+  height: 30px;
+  width: 95px;
+}
+
+.ico:active {
+  background-color: blue;
+}
+
+/* Estilo de janela minimizada */
+.janela.minimizada {
+  display: none; /* Torna a janela invisível e remove o espaço ocupado */
+}
+
+button {
+  cursor: pointer;
+}
