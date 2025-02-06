@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/hesmOS/static/css/main.4f854600.css",
+    "main.js": "/hesmOS/static/js/main.c2ee4195.js",
+    "static/js/488.3b432fd5.chunk.js": "/hesmOS/static/js/488.3b432fd5.chunk.js",
+    "static/media/LeviWindows.ttf": "/hesmOS/static/media/LeviWindows.1418bf0ef20f202d5c85.ttf",
+    "static/media/ms_sans_serif.woff": "/hesmOS/static/media/ms_sans_serif.aac84aa6de42b83d1a62.woff",
+    "static/media/ms_sans_serif_bold.woff": "/hesmOS/static/media/ms_sans_serif_bold.9fbe71248995f1c639d4.woff",
+    "static/media/ms_sans_serif.woff2": "/hesmOS/static/media/ms_sans_serif.0348082abb503fb6a8c2.woff2",
+    "static/media/ms_sans_serif_bold.woff2": "/hesmOS/static/media/ms_sans_serif_bold.7fcf57cc6e87ecddbf64.woff2",
+    "index.html": "/hesmOS/index.html",
+    "main.4f854600.css.map": "/hesmOS/static/css/main.4f854600.css.map",
+    "main.c2ee4195.js.map": "/hesmOS/static/js/main.c2ee4195.js.map",
+    "488.3b432fd5.chunk.js.map": "/hesmOS/static/js/488.3b432fd5.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.4f854600.css",
+    "static/js/main.c2ee4195.js"
+  ]
+}
