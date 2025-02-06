@@ -1,7 +1,7 @@
 {
   "name": "site-win98",
   "version": "0.1.0",
-  "homepage":"https://heitormancini.github.io/hesmOS/",
+  "homepage": "https://heitormancini.github.io/hesmOS/",
   "private": true,
   "dependencies": {
     "98.css": "^0.1.20",
@@ -14,7 +14,6 @@
   "scripts": {
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
-
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
