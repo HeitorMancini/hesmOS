@@ -1,0 +1,175 @@
+import type { DesktopShortcut, VfsNode } from "./types";
+
+export const VFS: VfsNode[] = [
+  { id: "root", kind: "folder", name: "C:", parentId: null },
+  { id: "dir-audiovisual", kind: "folder", name: "Audiovisual", parentId: "root" },
+  { id: "dir-worldbuilding", kind: "folder", name: "Worldbuilding", parentId: "root" },
+  { id: "dir-musica", kind: "folder", name: "Musica", parentId: "root" },
+  { id: "dir-engenharia", kind: "folder", name: "Engenharia", parentId: "root" },
+  {
+    id: "doc-about",
+    kind: "document",
+    format: "txt",
+    name: "LEIAME.TXT",
+    parentId: "root",
+    createdAt: "2026-10-23",
+    blocks: [
+      { type: "heading", level: 1, text: "hesmOS" },
+      {
+        type: "paragraph",
+        text: "Bem-vindo ao hesmOS, um portfólio transmídia em forma de sistema operacional.",
+      },
+      {
+        type: "paragraph",
+        text: "Cada pasta em C:\\ guarda uma frente de trabalho: programação, audiovisual, worldbuilding e música.",
+      },
+      {
+        type: "list",
+        items: [
+          "Meu Computador: navegue pelos arquivos.",
+          "Media Player: curtas e diários de voz.",
+          "WordPad: documentos de worldbuilding.",
+          "Gravador de Som: loops e experimentos sonoros.",
+          "Prompt do MS-DOS: digite HELP.",
+        ],
+      },
+    ],
+  },
+
+  {
+    id: "vid-curta",
+    kind: "video",
+    name: "Curta_Metragem.avi",
+    parentId: "dir-audiovisual",
+    createdAt: "2026-01-01",
+    source: { provider: "youtube", videoId: "" },
+    description: "TODO: sinopse do curta-metragem.",
+  },
+  {
+    id: "vid-diario-voz",
+    kind: "video",
+    name: "Diario_de_Voz.mp4",
+    parentId: "dir-audiovisual",
+    createdAt: "2026-01-01",
+    source: { provider: "file", src: "/media/video/diario.mp4", poster: "/media/video/diario.jpg" },
+    description: "TODO: descrição do diário de voz.",
+  },
+
+  {
+    id: "doc-sertao",
+    kind: "document",
+    format: "rtf",
+    name: "Sertao_Apocaliptico.doc",
+    parentId: "dir-worldbuilding",
+    createdAt: "2026-01-01",
+    tags: ["worldbuilding"],
+    blocks: [
+      { type: "heading", level: 1, text: "Projeto Sertão Apocalíptico" },
+      {
+        type: "paragraph",
+        text: "**Premissa.** TODO: descreva o mundo, o colapso e quem sobrevive nele.",
+      },
+      {
+        type: "quote",
+        text: "O sertão vai virar mar, e o mar vai virar sertão.",
+        author: "Antônio Conselheiro",
+      },
+      { type: "heading", level: 2, text: "Moodboard" },
+      {
+        type: "gallery",
+        columns: 3,
+        images: [
+          { src: "/media/img/sertao-01.svg", alt: "Sol sobre a caatinga" },
+          { src: "/media/img/sertao-02.svg", alt: "Mandacaru contra o céu vermelho" },
+          { src: "/media/img/sertao-03.svg", alt: "Estrada de terra no fim do mundo" },
+        ],
+      },
+      { type: "heading", level: 2, text: "Facções" },
+      {
+        type: "list",
+        items: ["*TODO*: facção 1", "*TODO*: facção 2", "*TODO*: facção 3"],
+      },
+      { type: "divider" },
+      { type: "paragraph", text: "TODO: geografia, economia, mitologia." },
+    ],
+  },
+  {
+    id: "doc-fosso",
+    kind: "document",
+    format: "rtf",
+    name: "Cosmologia_do_Fosso.doc",
+    parentId: "dir-worldbuilding",
+    createdAt: "2026-01-01",
+    tags: ["worldbuilding"],
+    blocks: [
+      { type: "heading", level: 1, text: "Cosmologia do Fosso" },
+      {
+        type: "image",
+        src: "/media/img/fosso-01.svg",
+        alt: "Diagrama do Fosso",
+        caption: "Fig. 1: as camadas do Fosso.",
+        width: 240,
+        align: "center",
+      },
+      { type: "paragraph", text: "TODO: origem do Fosso e suas camadas." },
+      { type: "heading", level: 2, text: "Camadas" },
+      {
+        type: "list",
+        ordered: true,
+        items: ["TODO: camada superior", "TODO: camada intermediária", "TODO: o fundo"],
+      },
+    ],
+  },
+
+  {
+    id: "aud-loop-01",
+    kind: "audio",
+    name: "loop_01.wav",
+    parentId: "dir-musica",
+    createdAt: "2026-01-01",
+    src: "/media/audio/loop-01.mp3",
+    loop: true,
+    notes: "TODO: descrição do loop.",
+  },
+  {
+    id: "aud-experimento-01",
+    kind: "audio",
+    name: "experimento_01.wav",
+    parentId: "dir-musica",
+    createdAt: "2026-01-01",
+    src: "/media/audio/experimento-01.mp3",
+    notes: "TODO: descrição do experimento.",
+  },
+
+  {
+    id: "lnk-hesmos",
+    kind: "link",
+    name: "hesmOS",
+    parentId: "dir-engenharia",
+    createdAt: "2026-10-23",
+    url: "https://hesm.net",
+    repo: "https://github.com/TODO/hesmOS",
+    stack: ["Next.js", "React", "TypeScript"],
+    description: "Este portfólio: um desktop Windows 98 no navegador.",
+  },
+
+  { id: "dir-lixeira", kind: "folder", name: "Lixeira", parentId: null, icon: "/icons/recycle.svg" },
+  {
+    id: "doc-descartes",
+    kind: "document",
+    format: "txt",
+    name: "ideias_descartadas.txt",
+    parentId: "dir-lixeira",
+    blocks: [{ type: "paragraph", text: "Nada para ver aqui. Ainda." }],
+  },
+];
+
+export const DESKTOP_SHORTCUTS: DesktopShortcut[] = [
+  { label: "Meu Computador", target: { appId: "explorer" } },
+  { label: "Lixeira", target: { fileId: "dir-lixeira" } },
+  { label: "Media Player", target: { appId: "video-player" } },
+  { label: "Sertão Apocalíptico", target: { fileId: "doc-sertao" } },
+  { label: "Gravador de Som", target: { appId: "sound-recorder" } },
+  { label: "Prompt do MS-DOS", target: { appId: "terminal" } },
+  { label: "LEIAME", target: { fileId: "doc-about" } },
+];

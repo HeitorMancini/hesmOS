@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="180" viewBox="0 0 240 180">
+  <rect width="240" height="180" fill="#e9b872"/>
+  <rect width="240" height="80" fill="#6b2d1a"/>
+  <path d="M0 80h240v100H0z" fill="#b5651d"/>
+  <path d="M100 80h40l60 100H40z" fill="#d9a066"/>
+  <path d="M118 80h4l6 100h-16z" fill="#fff3d6"/>
+  <text x="8" y="172" fill="#3a1a08" font-family="monospace" font-size="10">ESTRADA.BMP</text>
+</svg>

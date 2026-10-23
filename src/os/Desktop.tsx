@@ -1,34 +1,49 @@
 "use client";
 
-import { APPS } from "@/apps/registry";
+import { getApp } from "@/apps/registry";
+import { DESKTOP_SHORTCUTS } from "@/content/content";
+import type { DesktopShortcut } from "@/content/types";
+import { getNode, iconForNode } from "@/content/vfs";
 import { useWindowManager } from "@/os/WindowManager";
 
+function shortcutIcon(shortcut: DesktopShortcut): string {
+  if (shortcut.icon) return shortcut.icon;
+  if ("appId" in shortcut.target) return getApp(shortcut.target.appId)?.icon ?? "";
+  const node = getNode(shortcut.target.fileId);
+  return node ? iconForNode(node) : "";
+}
+
 export function DesktopIcons() {
-  const { openApp, setStartMenuOpen } = useWindowManager();
+  const { openApp, openFile, setStartMenuOpen } = useWindowManager();
+
+  const launch = (shortcut: DesktopShortcut) => {
+    if ("appId" in shortcut.target) openApp(shortcut.target.appId);
+    else openFile(shortcut.target.fileId);
+  };
 
   return (
     <div className="desktop-icons" role="list">
-      {APPS.map((app) => (
+      {DESKTOP_SHORTCUTS.map((shortcut) => (
         <button
-          key={app.id}
+          key={shortcut.label}
           type="button"
           className="desktop-icon"
           role="listitem"
-          aria-label={`Abrir ${app.title}`}
-          onDoubleClick={() => openApp(app.id)}
+          aria-label={`Abrir ${shortcut.label}`}
+          onDoubleClick={() => launch(shortcut)}
           onClick={(event) => {
             setStartMenuOpen(false);
             const coarse =
               typeof window !== "undefined" &&
               window.matchMedia("(pointer: coarse)").matches;
             if (event.detail === 0 || coarse) {
-              openApp(app.id);
+              launch(shortcut);
             }
           }}
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={app.icon} alt="" width={32} height={32} />
-          <span>{app.title}</span>
+          <img src={shortcutIcon(shortcut)} alt="" width={32} height={32} />
+          <span>{shortcut.label}</span>
         </button>
       ))}
     </div>

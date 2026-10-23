@@ -59,7 +59,7 @@ export function Taskbar() {
         <div className="start-menu" role="menu" aria-label="Menu Iniciar">
           <div className="start-menu__banner">hesmOS</div>
           <ul className="start-menu__list">
-            {APPS.map((app) => (
+            {APPS.filter((app) => app.showInStartMenu !== false).map((app) => (
               <li key={app.id}>
                 <button
                   type="button"

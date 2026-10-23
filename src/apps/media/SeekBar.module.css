@@ -1,0 +1,17 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.range {
+  width: 100%;
+  margin: 0;
+}
+
+.ticks {
+  height: 4px;
+  margin: 0 8px;
+  background-image: repeating-linear-gradient(90deg, #000 0 1px, transparent 1px 10%);
+  background-size: calc(100% + 1px) 100%;
+}

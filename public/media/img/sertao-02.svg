@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="180" viewBox="0 0 240 180">
+  <rect width="240" height="180" fill="#8c1c13"/>
+  <rect y="120" width="240" height="60" fill="#c27c3a"/>
+  <path d="M110 150V50a10 10 0 0 1 20 0v100z" fill="#1f3d1a"/>
+  <path d="M110 105H90V75a8 8 0 0 1 16 0v18h4zM130 95h20V65a8 8 0 0 0-16 0v18h-4z" fill="#1f3d1a"/>
+  <text x="8" y="172" fill="#fff" font-family="monospace" font-size="10">MANDACARU.BMP</text>
+</svg>

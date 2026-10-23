@@ -1,0 +1,161 @@
+.menuBar {
+  position: relative;
+  display: flex;
+  flex-shrink: 0;
+  gap: 0;
+  padding: 1px 2px;
+  font-size: 11px;
+}
+
+.menuRoot {
+  position: relative;
+}
+
+.menuButton {
+  min-width: unset;
+  min-height: unset;
+  padding: 2px 6px;
+  background: transparent;
+  box-shadow: none;
+  font: inherit;
+  color: #000;
+}
+
+.menuButton:focus {
+  outline: none;
+}
+
+.menuButtonOpen,
+.menuButton:hover {
+  background: navy;
+  color: #fff;
+}
+
+.menuButton:active {
+  padding: 2px 6px;
+  box-shadow: none;
+}
+
+.dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 50;
+  min-width: 160px;
+  margin: 0;
+  padding: 2px;
+  list-style: none;
+  background: silver;
+  box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #dfdfdf, inset -2px -2px grey,
+    inset 2px 2px #fff;
+}
+
+.dropdownItem {
+  position: relative;
+  display: flex;
+  width: 100%;
+  min-width: unset;
+  min-height: unset;
+  padding: 3px 20px;
+  justify-content: flex-start;
+  background: transparent;
+  box-shadow: none;
+  font: inherit;
+  color: #000;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.dropdownItem:not(:disabled):hover,
+.dropdownItem:not(:disabled):focus {
+  background: navy;
+  color: #fff;
+  outline: none;
+}
+
+.dropdownItem:active {
+  padding: 3px 20px;
+  box-shadow: none;
+}
+
+.dropdownItem:disabled {
+  color: grey;
+  text-shadow: 1px 1px #fff;
+}
+
+.checked::before {
+  content: "\2713";
+  position: absolute;
+  margin-left: -14px;
+}
+
+.separator {
+  height: 0;
+  margin: 3px 1px;
+  border-top: 1px solid grey;
+  border-bottom: 1px solid #fff;
+}
+
+.toolbar {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 2px;
+  padding: 2px 4px;
+  border-top: 1px solid #fff;
+  border-bottom: 1px solid grey;
+  font-size: 11px;
+}
+
+.toolbarButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  min-width: 24px;
+  min-height: 22px;
+  padding: 2px 6px;
+  background: transparent;
+  box-shadow: none;
+  font: inherit;
+}
+
+.toolbarButton:not(:disabled):hover {
+  box-shadow: inset -1px -1px grey, inset 1px 1px #fff;
+}
+
+.toolbarButton:not(:disabled):active,
+.toolbarButtonPressed {
+  padding: 3px 5px 1px 7px;
+  box-shadow: inset -1px -1px #fff, inset 1px 1px grey;
+}
+
+.toolbarButton:focus {
+  outline: none;
+}
+
+.toolbarSeparator {
+  align-self: stretch;
+  width: 0;
+  margin: 2px 3px;
+  border-left: 1px solid grey;
+  border-right: 1px solid #fff;
+}
+
+.statusBar {
+  flex-shrink: 0;
+  margin: 2px 0 0;
+}
+
+.statusBar :global(.status-bar-field) {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.inset {
+  box-sizing: border-box;
+  box-shadow: inset -1px -1px #fff, inset 1px 1px grey, inset -2px -2px #dfdfdf,
+    inset 2px 2px #0a0a0a;
+  padding: 2px;
+}

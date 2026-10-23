@@ -1,0 +1,138 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  padding: 0 2px 2px;
+}
+
+.glyph {
+  font-size: 9px;
+}
+
+.addressRow {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 4px;
+  border-bottom: 1px solid grey;
+}
+
+.addressLabel {
+  color: #000;
+}
+
+.address {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  gap: 4px;
+  min-width: 0;
+  height: 22px;
+  padding: 2px 4px;
+  background: #fff;
+}
+
+.address span {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.content {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+  margin-top: 2px;
+  background: #fff;
+}
+
+.content:focus {
+  outline: none;
+}
+
+.pane {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+}
+
+.empty {
+  margin: 8px;
+  color: grey;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 80px);
+  gap: 8px 4px;
+  margin: 0;
+  padding: 8px;
+  list-style: none;
+}
+
+.iconItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 2px;
+  cursor: default;
+  text-align: center;
+}
+
+.iconItem img {
+  image-rendering: pixelated;
+}
+
+.iconItem span {
+  padding: 1px 2px;
+  word-break: break-word;
+  line-height: 1.2;
+}
+
+.iconItem[aria-selected="true"] img {
+  filter: brightness(0.6) sepia(1) hue-rotate(190deg) saturate(4);
+}
+
+.iconItem[aria-selected="true"] span {
+  background: navy;
+  color: #fff;
+  outline: 1px dotted #fff;
+  outline-offset: -1px;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th {
+  position: sticky;
+  top: 0;
+  padding: 2px 6px;
+  background: silver;
+  box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #fff, inset -2px -2px grey;
+  font-weight: 400;
+  text-align: left;
+}
+
+.table td {
+  padding: 1px 6px;
+  white-space: nowrap;
+}
+
+.table td:first-child {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.row {
+  cursor: default;
+}
+
+.row[aria-selected="true"] {
+  background: navy;
+  color: #fff;
+}

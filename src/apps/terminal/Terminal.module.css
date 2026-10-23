@@ -1,0 +1,61 @@
+.root {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  padding: 4px 6px;
+  background: #000;
+  color: #c0c0c0;
+  font-family: "Lucida Console", "Courier New", monospace;
+  font-size: 13px;
+  line-height: 1.25;
+  cursor: text;
+  user-select: text;
+  -webkit-font-smoothing: auto;
+}
+
+.line {
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.line a {
+  color: #fff;
+}
+
+.inputLine {
+  display: flex;
+  align-items: baseline;
+  white-space: pre;
+}
+
+.input {
+  min-width: 1ch;
+  max-width: 100%;
+  height: auto;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  box-shadow: none;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  caret-color: transparent;
+}
+
+.cursor {
+  display: inline-block;
+  width: 1ch;
+  height: 3px;
+  margin-left: -1ch;
+  align-self: flex-end;
+  margin-bottom: 2px;
+  background: #c0c0c0;
+  animation: blink 1s steps(1) infinite;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}

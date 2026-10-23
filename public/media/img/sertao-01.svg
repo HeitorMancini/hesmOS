@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="180" viewBox="0 0 240 180">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#3a0a0a"/>
+      <stop offset="0.6" stop-color="#d4501c"/>
+      <stop offset="1" stop-color="#f6c15a"/>
+    </linearGradient>
+  </defs>
+  <rect width="240" height="180" fill="url(#sky)"/>
+  <circle cx="120" cy="118" r="44" fill="#fff1b8"/>
+  <path d="M0 130h240v50H0z" fill="#2b1608"/>
+  <path d="M0 132q30-8 60 0t60 0 60 0 60 0v8H0z" fill="#4a2810"/>
+  <text x="8" y="172" fill="#f6c15a" font-family="monospace" font-size="10">SOL.BMP</text>
+</svg>

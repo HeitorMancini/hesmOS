@@ -1,0 +1,192 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  padding: 0 2px 2px;
+}
+
+.main {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+  gap: 4px;
+  padding-top: 2px;
+}
+
+.stage {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+  gap: 4px;
+}
+
+.screen {
+  position: relative;
+  flex: 1;
+  min-height: 120px;
+  overflow: hidden;
+  background: #000;
+  box-shadow: inset 1px 1px grey, inset -1px -1px #fff;
+}
+
+.video,
+.iframe {
+  position: absolute;
+  inset: 2px;
+  width: calc(100% - 4px);
+  height: calc(100% - 4px);
+  border: 0;
+  background: #000;
+  object-fit: contain;
+}
+
+.focusShield {
+  position: absolute;
+  inset: 0;
+  min-width: 0;
+  min-height: 0;
+  padding: 0;
+  background: transparent;
+  box-shadow: none;
+  cursor: default;
+}
+
+.focusShield:active,
+.focusShield:focus {
+  box-shadow: none;
+  outline: none;
+}
+
+.noSignal {
+  position: absolute;
+  inset: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #c0c0c0;
+  font-family: "Lucida Console", monospace;
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  background:
+    repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.04) 0 1px, transparent 1px 3px),
+    radial-gradient(circle at center, #1a1a2e 0%, #000 75%);
+}
+
+.noSignal span {
+  padding: 4px 10px;
+  background: rgba(0, 0, 0, 0.6);
+  text-align: center;
+}
+
+.transport {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.control {
+  width: 28px;
+  min-width: 28px;
+  height: 24px;
+  min-height: 24px;
+  padding: 0;
+}
+
+.glyph {
+  font-size: 10px;
+  letter-spacing: -2px;
+}
+
+.control:disabled .glyph {
+  color: grey;
+  text-shadow: 1px 1px #fff;
+}
+
+.stop {
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+  background: #000;
+}
+
+.control:disabled .stop {
+  background: grey;
+  box-shadow: 1px 1px #fff;
+}
+
+.divider {
+  align-self: stretch;
+  width: 0;
+  margin: 2px 4px;
+  border-left: 1px solid grey;
+  border-right: 1px solid #fff;
+}
+
+.spacer {
+  flex: 1;
+}
+
+.volume {
+  width: 72px;
+}
+
+.info {
+  flex-shrink: 0;
+  padding: 4px 6px;
+  background: #000;
+  color: #00ff00;
+  font-family: "Lucida Console", monospace;
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+.info div {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.infoLabel {
+  color: #c0c0c0;
+}
+
+.playlist {
+  width: 150px;
+  flex-shrink: 0;
+  overflow: auto;
+  background: #fff;
+}
+
+.playlist ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.playlist li {
+  padding: 2px 4px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  cursor: default;
+}
+
+.playlist li[aria-selected="true"] {
+  background: navy;
+  color: #fff;
+}
+
+@media (max-width: 520px) {
+  .playlist {
+    display: none;
+  }
+}

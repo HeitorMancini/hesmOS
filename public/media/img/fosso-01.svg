@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="240" viewBox="0 0 240 240">
+  <rect width="240" height="240" fill="#000"/>
+  <circle cx="120" cy="120" r="110" fill="#1a1a40" stroke="#5050a0"/>
+  <circle cx="120" cy="120" r="82" fill="#26124a" stroke="#7a50c0"/>
+  <circle cx="120" cy="120" r="54" fill="#3a0d3a" stroke="#c050c0"/>
+  <circle cx="120" cy="120" r="26" fill="#000" stroke="#ff80ff"/>
+  <path d="M120 10v220M10 120h220" stroke="#ffffff22"/>
+  <text x="8" y="232" fill="#c0c0ff" font-family="monospace" font-size="10">FOSSO.BMP</text>
+</svg>

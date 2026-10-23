@@ -8,11 +8,13 @@ import {
   useReducer,
   type ReactNode,
 } from "react";
-import { getApp } from "@/apps/registry";
-import type { Bounds, OsWindow } from "@/os/types";
+import { getApp, resolveAppForNode, windowTitle } from "@/apps/registry";
+import { getNode } from "@/content/vfs";
+import type { AppDefinition, Bounds, OsWindow } from "@/os/types";
 
 const TASKBAR_HEIGHT = 32;
 const CASCADE_OFFSET = 28;
+const DEFAULT_MIN_SIZE = { width: 220, height: 120 };
 
 type OsState = {
   windows: OsWindow[];
@@ -22,7 +24,9 @@ type OsState = {
 };
 
 type OsAction =
-  | { type: "open"; appId: string }
+  | { type: "open"; appId: string; fileId?: string }
+  | { type: "setFile"; id: string; fileId?: string }
+  | { type: "resize"; id: string; width: number; height: number }
   | { type: "close"; id: string }
   | { type: "focus"; id: string }
   | { type: "minimize"; id: string }
@@ -62,6 +66,27 @@ function cascadeOrigin(count: number): { x: number; y: number } {
   return { x: 60 + col * CASCADE_OFFSET, y: 40 + col * CASCADE_OFFSET };
 }
 
+function isCoarsePointer(): boolean {
+  return typeof window !== "undefined" && window.matchMedia("(pointer: coarse)").matches;
+}
+
+function findExisting(
+  windows: OsWindow[],
+  app: AppDefinition,
+  fileId: string | undefined,
+): OsWindow | undefined {
+  switch (app.instancing) {
+    case "single":
+      return windows.find((win) => win.appId === app.id);
+    case "perFile":
+      return windows.find(
+        (win) => win.appId === app.id && (fileId === undefined || win.fileId === fileId),
+      );
+    case "multi":
+      return undefined;
+  }
+}
+
 function osReducer(state: OsState, action: OsAction): OsState {
   switch (action.type) {
     case "setStartMenu":
@@ -69,10 +94,12 @@ function osReducer(state: OsState, action: OsAction): OsState {
     case "open": {
       const app = getApp(action.appId);
       if (!app) return state;
+      const file = getNode(action.fileId);
 
-      const existing = state.windows.find((win) => win.appId === action.appId);
+      const existing = findExisting(state.windows, app, action.fileId);
       if (existing) {
         const nextZ = state.nextZ + 1;
+        const swapFile = file && existing.fileId !== file.id;
         return {
           ...state,
           startMenuOpen: false,
@@ -80,7 +107,12 @@ function osReducer(state: OsState, action: OsAction): OsState {
           nextZ,
           windows: state.windows.map((win) =>
             win.id === existing.id
-              ? { ...win, mode: win.mode === "minimized" ? "normal" : win.mode, zIndex: nextZ }
+              ? {
+                  ...win,
+                  ...(swapFile ? { fileId: file.id, title: windowTitle(app, file) } : {}),
+                  mode: win.mode === "minimized" ? "normal" : win.mode,
+                  zIndex: nextZ,
+                }
               : win,
           ),
         };
@@ -95,15 +127,18 @@ function osReducer(state: OsState, action: OsAction): OsState {
         app.defaultSize.width,
         app.defaultSize.height,
       );
+      const maximize = isCoarsePointer() && app.resizable !== false;
       const win: OsWindow = {
         id,
         appId: app.id,
-        title: app.title,
+        fileId: file?.id,
+        title: windowTitle(app, file),
         icon: app.icon,
         zIndex: nextZ,
-        mode: "normal",
+        mode: maximize ? "maximized" : "normal",
         restoreBounds: bounds,
         ...bounds,
+        ...(maximize ? { x: 0, y: 0, ...desktopSize() } : {}),
       };
 
       return {
@@ -234,6 +269,40 @@ function osReducer(state: OsState, action: OsAction): OsState {
         }),
       };
     }
+    case "resize": {
+      return {
+        ...state,
+        windows: state.windows.map((win) => {
+          if (win.id !== action.id || win.mode === "maximized") return win;
+          const min = getApp(win.appId)?.minSize ?? DEFAULT_MIN_SIZE;
+          const desk = desktopSize();
+          const width = Math.min(Math.max(min.width, action.width), desk.width - win.x);
+          const height = Math.min(Math.max(min.height, action.height), desk.height - win.y);
+          return {
+            ...win,
+            width,
+            height,
+            restoreBounds: { ...win.restoreBounds, width, height },
+          };
+        }),
+      };
+    }
+    case "setFile": {
+      const file = getNode(action.fileId);
+      if (action.fileId && !file) return state;
+      return {
+        ...state,
+        windows: state.windows.map((win) => {
+          if (win.id !== action.id) return win;
+          const app = getApp(win.appId);
+          return {
+            ...win,
+            fileId: file?.id,
+            title: app ? windowTitle(app, file) : win.title,
+          };
+        }),
+      };
+    }
     default:
       return state;
   }
@@ -247,7 +316,10 @@ const initialState: OsState = {
 };
 
 type WindowManagerValue = OsState & {
-  openApp: (appId: string) => void;
+  openApp: (appId: string, fileId?: string) => void;
+  openFile: (fileId: string) => void;
+  setWindowFile: (id: string, fileId?: string) => void;
+  resizeWindow: (id: string, width: number, height: number) => void;
   closeWindow: (id: string) => void;
   focusWindow: (id: string) => void;
   minimizeWindow: (id: string) => void;
@@ -263,8 +335,25 @@ const WindowManagerContext = createContext<WindowManagerValue | null>(null);
 export function WindowManagerProvider({ children }: { children: ReactNode }) {
   const [state, dispatch] = useReducer(osReducer, initialState);
 
-  const openApp = useCallback((appId: string) => {
-    dispatch({ type: "open", appId });
+  const openApp = useCallback((appId: string, fileId?: string) => {
+    dispatch({ type: "open", appId, fileId });
+  }, []);
+  const openFile = useCallback((fileId: string) => {
+    const node = getNode(fileId);
+    if (!node) return;
+    if (node.kind === "link") {
+      window.open(node.url, "_blank", "noopener,noreferrer");
+      dispatch({ type: "setStartMenu", open: false });
+      return;
+    }
+    const app = resolveAppForNode(node);
+    if (app) dispatch({ type: "open", appId: app.id, fileId });
+  }, []);
+  const setWindowFile = useCallback((id: string, fileId?: string) => {
+    dispatch({ type: "setFile", id, fileId });
+  }, []);
+  const resizeWindow = useCallback((id: string, width: number, height: number) => {
+    dispatch({ type: "resize", id, width, height });
   }, []);
   const closeWindow = useCallback((id: string) => {
     dispatch({ type: "close", id });
@@ -295,6 +384,9 @@ export function WindowManagerProvider({ children }: { children: ReactNode }) {
     () => ({
       ...state,
       openApp,
+      openFile,
+      setWindowFile,
+      resizeWindow,
       closeWindow,
       focusWindow,
       minimizeWindow,
@@ -307,6 +399,9 @@ export function WindowManagerProvider({ children }: { children: ReactNode }) {
     [
       state,
       openApp,
+      openFile,
+      setWindowFile,
+      resizeWindow,
       closeWindow,
       focusWindow,
       minimizeWindow,

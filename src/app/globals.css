@@ -28,12 +28,18 @@ body {
 }
 
 .desktop-icons {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
   display: flex;
   flex-direction: column;
+  flex-wrap: wrap;
+  align-content: flex-start;
   align-items: flex-start;
   gap: 8px;
   padding: 12px 8px;
-  width: max-content;
+  box-sizing: border-box;
   z-index: 1;
 }
 
@@ -112,21 +118,48 @@ body {
   image-rendering: pixelated;
 }
 
+.os-window[hidden] {
+  display: none;
+}
+
+.os-window--maximized {
+  inset: 0;
+  width: auto;
+  height: auto;
+}
+
+.os-window .title-bar-controls button:disabled {
+  opacity: 0.5;
+}
+
 .os-window__body {
+  position: relative;
+  display: flex;
+  flex-direction: column;
   flex: 1;
   min-height: 0;
-  margin: 8px;
-  overflow: auto;
+  margin-top: 2px;
+  overflow: hidden;
   background: silver;
+  font-size: 11px;
 }
 
-.app-placeholder {
-  font-size: 12px;
-  line-height: 1.4;
+.os-window__error {
+  margin: 8px;
 }
 
-.app-placeholder p + p {
-  margin-top: 8px;
+.os-window__grip {
+  position: absolute;
+  right: 2px;
+  bottom: 2px;
+  width: 14px;
+  height: 14px;
+  cursor: nwse-resize;
+  touch-action: none;
+  z-index: 2;
+  background:
+    linear-gradient(135deg, transparent 50%, #fff 50%, #fff 57%, grey 57%, grey 64%, transparent 64%),
+    linear-gradient(135deg, transparent 71%, #fff 71%, #fff 78%, grey 78%, grey 85%, transparent 85%);
 }
 
 .taskbar {
